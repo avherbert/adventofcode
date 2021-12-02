@@ -26,17 +26,15 @@
 
 (defn final-position
   "Calculates the final position"
-  [position]
-  (->> (select-keys position [:horizontal :depth]) ;; Extract `horizontal` and `depth` for calculation
-       (vals)                                      ;; Get `vals` from `position` map
-       (apply *)))                                 ;; Apply multiplication to each int in sequence
+  [{:keys [horizontal depth]}]
+  (* horizontal depth)) ;; Multiply `horizontal` by `depth`
 
 (defn navigate
   "Reads navigation commands, processing each one and obtaining a final position"
-  [position]
+  [starting-position]
   (let [data (-> (slurp "./resources/puzzle_input.dat") (string/split #"\n"))]
     (->> (map #(string/split % #" ") data) ;; String -> 2-tuple
-         (reduce move position)            ;; Reduce across data using `move-fn`, starting at `position`
+         (reduce move starting-position)   ;; Reduce across data using `move`, starting at `starting-position`
          (final-position))))               ;; Calculate the answer
 
 (defn part-1 [] (navigate {:horizontal 0 :depth 0}))
