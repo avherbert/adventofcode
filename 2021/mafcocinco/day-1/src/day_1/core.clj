@@ -1,7 +1,7 @@
 (ns day-1.core
   (:require [clojure.string :as string]))
 
-;; Assumes there is a data file at `./resources/puzzel_1_input.dat`
+;; Assumes there is a data file at `./resources/day_1_input.dat`
 ;; This ingests the file, splits the string on \n and converts each string to an integer
 ;; The result is a list of integers like `(1 23 45 42 19 ...)`
 (def data (map #(Integer/parseInt %) (-> (slurp "./resources/day_1_input.dat") (string/split #"\n"))))
