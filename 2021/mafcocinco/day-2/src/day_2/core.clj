@@ -2,7 +2,7 @@
   (:require [clojure.string :as string]))
 
 (defn forward
-  "Handles `forward` command for part 2"
+  "Handles `forward` command"
   [{:keys [aim] :as position} amount]            ;; Destructure position, binding `aim` value
   (cond-> (update position :horizontal + amount) ;; add `amount` to `horizontal`
     (int? aim)                                   ;; When `aim` is an integer...
@@ -16,7 +16,7 @@
     (update position :depth direction-fn amount))) ;; ... otherwise adjust the value of `depth`
 
 (defn move
-  "Moves specified direction using rules from part 1"
+  "Moves specified direction"
   [position [direction amount]]
   (let [amount (Integer/parseInt amount)]   ;; convert string to int
     (case (keyword direction)               ;; convert direction to keyword for use in case form
@@ -25,14 +25,14 @@
       :forward (forward position amount)))) ;; adjust `forward` by `amount`
 
 (defn final-position
-  "Calculates the answer"
+  "Calculates the final position"
   [position]
   (->> (select-keys position [:horizontal :depth]) ;; Extract `horizontal` and `depth` for calculation
        (vals)                                      ;; Get `vals` from `position` map
        (apply *)))                                 ;; Apply multiplication to each int in sequence
 
 (defn navigate
-  "Reads data from the data file, transforming it into a usable state"
+  "Reads navigation commands, processing each one and obtaining a final position"
   [position]
   (let [data (-> (slurp "./resources/puzzle_input.dat") (string/split #"\n"))]
     (->> (map #(string/split % #" ") data) ;; String -> 2-tuple
