@@ -14,7 +14,7 @@
 
 (defn forward
   "Handles `forward` command for part 2"
-  [{:keys [aim] :as position} amount]           ;; Destructor position, binding `aim` value
+  [{:keys [aim] :as position} amount]           ;; Destructure position, binding `aim` value
   (-> (update position :depth + (* aim amount)) ;; add `aim` * `amount` to `depth`
       (update :horizontal + amount)))           ;; add `amount` to `horizontal`
 
