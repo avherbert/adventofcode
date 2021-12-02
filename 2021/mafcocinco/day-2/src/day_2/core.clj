@@ -1,8 +1,6 @@
 (ns day-2.core
   (:require [clojure.string :as string]))
 
-(def position )
-
 (defn forward
   "Handles `forward` command for part 2"
   [{:keys [aim] :as position} amount]            ;; Destructure position, binding `aim` value
