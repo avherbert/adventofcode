@@ -30,17 +30,17 @@
 (defn calculate-answer
   "Calculates the answer"
   [position]
-  (->> (select-keys position [:horizontal :depth])
-       (vals)
-       (apply *)))
+  (->> (select-keys position [:horizontal :depth]) ;; Extract `horizontal` and `depth` for calculation
+       (vals)                                      ;; Get `vals` from `position` map
+       (apply *)))                                 ;; Apply multiplication to each int in sequence
 
 (defn calculate
   "Reads data from the data file, transforming it into a usable state"
   [move-fn]
-  (let [data (-> (slurp "./resources/puzzle_input.dat") (string/split #"\n"))]
-    (->> (map #(string/split % #" ") data)
-         (reduce move-fn position)
-         (calculate-answer))))
+  (let [data (-> (slurp "./resources/puzzle_input.dat") (string/split #"\n"))] 
+    (->> (map #(string/split % #" ") data) ;; String -> 2-tuple
+         (reduce move-fn position)         ;; Reduce across data using `move-fn`, starting at `position`
+         (calculate-answer))))             ;; Calculate the answer
 
 (defn part-1 [] (calculate move-part-1))
 (defn part-2 [] (calculate move-part-2))
