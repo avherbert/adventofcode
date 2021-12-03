@@ -22,7 +22,7 @@
 (defn epsilon [gamma] (map flip gamma))
 
 (defn life-support-rating
-  "Calculates the oxygen generator rating following rules in part-2 of day-3"
+  "Calculates the life support rating"
   [comp bit]
   (loop [potential-answers data
          position 0]
