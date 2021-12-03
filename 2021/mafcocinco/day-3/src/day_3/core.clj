@@ -26,7 +26,7 @@
   [comp bit]
   (loop [potential-answers data
          position 0]
-    (let [bits (apply mapv vector potential-answers)]
+    (let [bits (rotate potential-answers)]
       (cond
         ;; Found the answer!
         (= (count potential-answers) 1)
@@ -36,7 +36,7 @@
         (empty? potential-answers)
         (throw (ex-info "data is invalid" {}))
 
-        ;; Otherwise, we filter out potential anwers
+        ;; Otherwise, we filter potential anwers
         :else
         (-> (filter #(= (aggregate-bit comp bit (nth bits position)) (nth % position)) potential-answers)
             (recur (inc position)))))))
