@@ -1,0 +1,5 @@
+forward 1
+down 1
+forward 1
+down 3
+up 1
